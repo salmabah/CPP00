@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:17:04 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/06/25 06:34:12 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:38:37 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void    PhoneBook::addNewContact()
         index = 0;
     for (int i = 0; i < 5; i++)
     {
-        std::cout<<Contact::_msgOut[i]<<std::endl;;
+        std::cout<<mesContacts[index].getMessage(i)<<std::endl;;
         std::getline(std::cin, str);
         if (std::cin.eof() == true)
         {

@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:05:50 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/06/25 06:25:38 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:37:22 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ private :
     std::string     _nickName;
     std::string     _darkestSecret;
     int             _numTel;
-    
-public :
     static std::string   _msgOut[5];
+
+public :
     Contact();
     std::string getFirstName();
     std::string getLastName();
@@ -39,6 +39,7 @@ public :
     void setDarkestSecret(std::string dsecrect);
     void setNumTel(int num);
     
+    std::string& getMessage(int i);
     void afficheContact();
     ~Contact();
 };

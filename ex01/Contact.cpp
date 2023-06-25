@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:14:59 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/06/25 06:23:15 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:37:49 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ std::string Contact::_msgOut[5] =
     "Entrer le lourd secret : ",
     "Entrer le numéro de tel : "
 };
+
 
 Contact::Contact()
 {
@@ -94,6 +95,12 @@ void Contact::setDarkestSecret(std::string dsecret)
 void Contact::setNumTel(int num)
 {
     _numTel = num;
+}
+
+// In Contact.cpp
+std::string& Contact::getMessage(int i)
+{
+    return _msgOut[i];
 }
 
 void Contact::afficheContact()

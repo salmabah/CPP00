@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:19:39 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/06/25 06:29:35 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:41:47 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int main()
     {
         std::cout << "Veuillez entrer l'une de ces commandes [ADD, SEARCH, EXIT] : ";
         std::getline(std::cin, str);
+        if (std::cin.eof())
+            exit(0);
         std::cout<<"________________________________________"<<std::endl;
         std::cout<<"\t\t\tAJOUTER UN CONTACT"<<std::endl;
         std::cout<<"________________________________________"<<std::endl;
