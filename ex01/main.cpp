@@ -22,20 +22,28 @@ int main()
     Contact nvContact;
     
     while (1)
+    
     {
-        std::cout << "Veuillez entrer l'une de ces commandes [ADD, SEARCH, EXIT] : ";
-        std::getline(std::cin, str);
-        if (std::cin.eof())
-            exit(0);
-        std::cout<<"________________________________________"<<std::endl;
-        std::cout<<"\t\t\tAJOUTER UN CONTACT"<<std::endl;
-        std::cout<<"________________________________________"<<std::endl;
+        std::cout<<"________________________________________________________________________________"<<std::endl;
+        std::cout<<"\t\t\tADD    : AJOUTER UN CONTACT"<<std::endl;
+        std::cout<<"________________________________________________________________________________"<<std::endl;
+        std::cout<<"________________________________________________________________________________"<<std::endl;
+        std::cout<<"\t\t\tSEARCH : CHERCHER UN CONTACT"<<std::endl;
+        std::cout<<"________________________________________________________________________________"<<std::endl;
+        std::cout<<"________________________________________________________________________________"<<std::endl;
+        std::cout<<"\t\t\tEXIT   : QUITTER LE PROGRAMME"<<std::endl;
+        std::cout<<"________________________________________________________________________________"<<std::endl;
         if (str == "ADD")
         { 
             monRepertoire.addNewContact();
         }
         else if (str == "SEARCH")
             std::cout<<"cest SEARCH"<<std::endl;
+        
+        std::cout << "Veuillez entrer l'une de ces commandes [ADD, SEARCH, EXIT] : ";
+        std::getline(std::cin, str);
+        if (std::cin.eof() || str == "EXIT")
+            exit(0);
     }
     return (0);
 }

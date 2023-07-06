@@ -20,32 +20,15 @@ std::string Contact::_msgOut[5] =
     "Entrer le numéro de tel : "
 };
 
-
 Contact::Contact()
 {
-    _firstName = "";
-    _lastName = "";
-    _nickName = "";
-    _darkestSecret = "";
-    _numTel = 0;
+    std::cout<<"Constructeur de Contact est appelé"<<std::endl;
 }
 
-// Contact::Contact(Contact const &nv)
-// {
-//     // this.
-//     _firstName = nv.getFirstName();
-//     // this.
-//     _lastName = nv.getLastName();
-//     // this.
-//     _nickName = nv.getNickName();
-//     // this.
-//     _darkestSecret = nv.getDarkestSecret();
-//     // this.
-//     _numTel= nv.getNumTel();
-// }
-
 Contact::~Contact()
-{ }
+{ 
+    std::cout<<"Destructeur de Contact est appelé"<<std::endl;
+}
 
 std::string Contact::getFirstName()
 {
