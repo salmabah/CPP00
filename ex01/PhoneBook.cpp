@@ -6,43 +6,51 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:17:04 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/06/25 16:38:37 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/07/07 07:40:13 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "PhoneBook.hpp"
 
-int PhoneBook::index = 0;
+int PhoneBook::index = -1;
 
 PhoneBook::PhoneBook()
 {
-    std::cout<<"Constructeur de PhoneBook est appelé"<<std::endl;
 }
 
 PhoneBook::~PhoneBook()
 {
-    std::cout<<"Destructeur de PhoneBook est appelé"<<std::endl;
 }
 
 
-bool is_alpha(std::string str)
+bool is_alphasp(std::string str)
 {
-    for (int i = 0; i < str.lenght(), i++)
+    for (unsigned long i = 0; i < str.length(); i++)
     {
-        if (!isapha(str[i]))
+        if (!isalpha(str[i]) && str[i] != ' ')
             return (false);
     }
-    return (true)
+    return (true);
 }
 
 bool is_num(std::string str)
 {
-    for (int i = 0; i < str.lenght(), i++)
+    int nb;
+    
+    for (unsigned long i = 0; i < str.length(); i++)
     {
-        if (!isdigit(str[i]))
+        if (!std::isdigit(str[i]))
             return (false);
     }
-    return (true)
+    try
+    {
+        nb = std::stoi(str);
+    }
+    catch(std::exception &e)
+    {
+        return (false);
+    }
+    return (true);
 }
 
 
@@ -51,10 +59,11 @@ void    PhoneBook::addNewContact()
     std::string str;
     std::string msg = "";
     
-    if (index != 0)
-        index++;
+    index++;
     if (index > 7)
         index = 0;
+    if (index < -1)
+        index = -1;
     for (int i = 0; i < 5; i++)
     {
         std::cout<<mesContacts[index].getMessage(i)<<std::endl;;
@@ -66,41 +75,96 @@ void    PhoneBook::addNewContact()
         }
         if (i == 0)
         {
-            if (!is_alpha(str))
-                msg = "Le prénom est erroné";
-            this->mesContacts[index].setFirstName(str);
+            if (!is_alphasp(str) || str.empty())
+                msg = "Le prénom est erroné ou vide";
+            else
+                this->mesContacts[index].setFirstName(str);
         }
         else if (i == 1)
         {
-            if (!is_alpha(str))
-                msg = "Le nom est erroné";
-            this->mesContacts[index].setLastName(str);}
+            if (!is_alphasp(str) || str.empty())
+                msg = "Le nom est erroné ou vide";
+            else
+                this->mesContacts[index].setLastName(str);
+        }
         else if (i == 2)
-            this->mesContacts[index].setNickName(str);
+        {
+            if (str.empty())
+                msg = "Le nickname est vide";
+            else
+                this->mesContacts[index].setNickName(str);
+        }
         else if (i == 3)
-            this->mesContacts[index].setDarkestSecret(str);
+        {
+            if (str.empty())
+                msg = "Le dark secret est vide";
+            else
+                this->mesContacts[index].setDarkestSecret(str);
+        }
         else if (i == 4)
         {
-            if (!is_num(str))
-                msg = "Le numéro est erroné";       
-            this->mesContacts[index].setNumTel(std::stoi(str));
+            if (!is_num(str) || str.empty())
+                msg = "Le numéro est erroné ou vide";
+            else
+                this->mesContacts[index].setNumTel(std::stoi(str));
+        }
+        if (!msg.empty())
+        {
+            index--;
+            std::cout<<"ERROR : "<<msg<<std::endl;
+            break;
         }
     }
     if (msg.empty())
-    {
-        this->mesContacts[index].afficheContact();
         std::cout<<"Le contact est ajouté avec succés"<<std::endl;
-    }
-    else
-    {
-        this->mesContacts[index] =  NULL;
-        index--;
-
-    }
-
 }
 
-// Contact PhoneBook::searchContact()
-// {
+void PhoneBook::printHeader()
+{
+    std::cout<<std::setw(10)<<"INDEX"<<"|"
+            <<std::setw(10)<<"FIRST NAME"<<"|"
+            <<std::setw(10)<<"LAST NAME"<<"|"
+            <<std::setw(10)<<"NICKNAME"<<std::endl;
+}
 
-// }
+void PhoneBook::printContacts()
+{
+    int i = 0;
+    // std::cout<<index<<std::endl;
+    // for (int i = 0; i < index + 1; i++)
+    while (this->mesContacts[i].getFirstName().size() != 0 && i<=7)
+    {
+        this->mesContacts[i].afficheContact(i);
+        i++;
+    }
+    std::cout<<std::endl;
+}
+
+void PhoneBook::searchContact()
+{
+    std::string ind;
+    int id = 0;
+
+    if (index == -1)
+        std::cout<<"le repertoire est vide!"<<std::endl;
+    else
+    {
+        printHeader();
+        printContacts();
+        std::cout<<"Entrer l'index du contact que vous voulez afficher"<<std::endl;
+        std::getline(std::cin, ind);
+        if (is_num(ind))
+        {
+            id = std::stoi(ind);
+            if (this->mesContacts[id].getFirstName().size() != 0 && id<=7)
+            {
+                printHeader();
+                this->mesContacts[id].afficheContact(id);
+            }
+            else
+                std::cout<<"cet index n'existe pas"<<std::endl;
+        }
+        else
+            std::cout<<"cet index n'est pas valide"<<std::endl;
+    }
+}

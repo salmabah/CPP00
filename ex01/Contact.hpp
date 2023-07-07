@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:05:50 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/06/25 16:37:22 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/07/07 06:14:23 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CONTACT_HPP
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 
 class Contact
@@ -38,9 +39,9 @@ public :
     void setNickName(std::string nickname);
     void setDarkestSecret(std::string dsecrect);
     void setNumTel(int num);
-    
     std::string& getMessage(int i);
-    void afficheContact();
+    std::string checkLength(std::string str);
+    void afficheContact(int i);
     ~Contact();
 };
 

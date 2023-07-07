@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 02:55:56 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/06/25 01:43:39 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/07/07 00:17:17 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main(int ac, char *av[])
         for (int i = 1; i < ac; i++)
         {
             std::string chaineString(av[i]);
-            for (int j = 0; j < (int)chaineString.size(); j++)
+            for (unsigned long j = 0; j < chaineString.size(); j++)
                 std::cout<<static_cast<char>(toupper(chaineString[j]));
         }
     }

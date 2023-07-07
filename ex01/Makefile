@@ -1,16 +1,15 @@
-NAME = megaphone
+NAME = phonebook
 
-SRC = megaphone.cpp
+SRCS = main.cpp PhoneBook.cpp Contact.cpp
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
 CC = c++	
 
-
 all : $(NAME)
 
-$(NAME) : $(SRC) 
-	@$(CC) $(FLAGS) $(SRC) -o $(NAME)
+$(NAME) : $(SRCS) 
+	@$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 clean:
 	@rm -f $(NAME)

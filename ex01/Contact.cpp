@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:14:59 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/06/25 16:37:49 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/07/07 06:16:07 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ std::string Contact::_msgOut[5] =
 
 Contact::Contact()
 {
-    std::cout<<"Constructeur de Contact est appelé"<<std::endl;
+    // std::cout<<"Constructeur de Contact est appelé"<<std::endl;
 }
 
 Contact::~Contact()
 { 
-    std::cout<<"Destructeur de Contact est appelé"<<std::endl;
+    // std::cout<<"Destructeur de Contact est appelé"<<std::endl;
 }
 
 std::string Contact::getFirstName()
@@ -86,11 +86,18 @@ std::string& Contact::getMessage(int i)
     return _msgOut[i];
 }
 
-void Contact::afficheContact()
+std::string Contact::checkLength(std::string str)
 {
-    std::cout<<"Prénom : "<<_firstName<<std::endl;
-    std::cout<<"Nom : "<<_lastName<<std::endl;
-    std::cout<<"Nicknmae : "<<_nickName<<std::endl;
-    std::cout<<"Darkest Secret : "<<_darkestSecret<<std::endl;
-    std::cout<<"Numero de tel : "<<_numTel<<std::endl;
+    if (str.size() > 10)
+       return (str.substr(0,9)+".");
+    else
+        return (str);
+}
+
+void Contact::afficheContact(int i)
+{
+    std::cout<<std::setw(10)<<i<<"|"<<
+                std::setw(10)<<checkLength(_firstName)<<"|"<<
+                std::setw(10)<<checkLength(_lastName)<<"|"<<
+                std::setw(10)<<checkLength(_nickName)<<std::endl;
 }
