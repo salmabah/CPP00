@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:17:04 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/07/09 08:36:26 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/07/09 23:47:00 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void PhoneBook::addNewContact()
     for (int i = 0; i < 5; i++)
     {
         std::cout << mesContacts[index].getMessage(i) << std::endl;
-        ;
+        
         std::getline(std::cin, str);
         if (std::cin.eof() == true)
         {
@@ -106,7 +106,7 @@ void PhoneBook::addNewContact()
             if (!is_num(str) || str.empty())
                 msg = "Le numéro est erroné ou vide";
             else
-                this->mesContacts[index].setNumTel(std::atoi(str.c_str()));
+                this->mesContacts[index].setNumTel(str);
         }
         if (!msg.empty())
         {
@@ -128,6 +128,21 @@ void PhoneBook::printHeader()
               << std::setw(10) << "LAST NAME"
               << "|"
               << std::setw(10) << "NICKNAME" << std::endl;
+}
+
+void PhoneBook::printDetails()
+{
+    std::cout << std::setw(10) << "INDEX"
+              << "|"
+              << std::setw(10) << "FIRST NAME"
+              << "|"
+              << std::setw(10) << "LAST NAME"
+              << "|"
+              << std::setw(10) << "NICKNAME"
+              << "|"
+              << std::setw(10) << "PHONE"
+              << "|"
+              << std::setw(10) << "D SECRET" << std::endl;
 }
 
 void PhoneBook::printContacts()
@@ -159,13 +174,15 @@ void PhoneBook::searchContact()
         if (is_num(ind))
         {
             id =std::atoi(ind.c_str());
-            if (this->mesContacts[id].getFirstName().size() != 0 && id <= 7)
+            if (id < 0 || id > 7)
+                std::cout << "cet index n'existe pas" << std::endl;
+            else if (this->mesContacts[id].getFirstName().size() != 0 && id <= 7)
             {
-                printHeader();
-                this->mesContacts[id].afficheContact(id);
+                printDetails();
+                this->mesContacts[id].afficheContactDetails(id);
             }
             else
-                std::cout << "cet index n'existe pas" << std::endl;
+                 std::cout << "ce contact n'existe pas" << std::endl;
         }
         else
             std::cout << "cet index n'est pas valide" << std::endl;

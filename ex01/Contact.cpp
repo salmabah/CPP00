@@ -6,7 +6,7 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:14:59 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/07/07 06:16:07 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/07/09 21:20:34 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ std::string Contact::getDarkestSecret()
     return (_darkestSecret);
 }
 
-int Contact::getNumTel()
+std::string Contact::getNumTel()
 {
     return (_numTel);
 }
@@ -75,7 +75,7 @@ void Contact::setDarkestSecret(std::string dsecret)
     _darkestSecret = dsecret;
 }
 
-void Contact::setNumTel(int num)
+void Contact::setNumTel(std::string num)
 {
     _numTel = num;
 }
@@ -100,4 +100,14 @@ void Contact::afficheContact(int i)
                 std::setw(10)<<checkLength(_firstName)<<"|"<<
                 std::setw(10)<<checkLength(_lastName)<<"|"<<
                 std::setw(10)<<checkLength(_nickName)<<std::endl;
+}
+
+void Contact::afficheContactDetails(int i)
+{
+    std::cout<<std::setw(10)<<i<<"|"<<
+                std::setw(10)<<checkLength(_firstName)<<"|"<<
+                std::setw(10)<<checkLength(_lastName)<<"|"<<
+                std::setw(10)<<checkLength(_nickName)<<"|"<<
+                std::setw(10)<<checkLength(_numTel)<<"|"<<
+                std::setw(10)<<checkLength(_darkestSecret)<<std::endl;
 }
