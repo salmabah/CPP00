@@ -6,11 +6,11 @@
 /*   By: sbahraou <sbahraou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 06:17:04 by sbahraou          #+#    #+#             */
-/*   Updated: 2023/07/07 07:40:13 by sbahraou         ###   ########.fr       */
+/*   Updated: 2023/07/09 08:36:26 by sbahraou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "PhoneBook.hpp"
+#include "PhoneBook.hpp"
 
 int PhoneBook::index = -1;
 
@@ -21,7 +21,6 @@ PhoneBook::PhoneBook()
 PhoneBook::~PhoneBook()
 {
 }
-
 
 bool is_alphasp(std::string str)
 {
@@ -35,30 +34,30 @@ bool is_alphasp(std::string str)
 
 bool is_num(std::string str)
 {
-    int nb;
-    
+    unsigned long num = 0;
+
+    if (str.length() > 10 || str.empty())
+        return (false);
     for (unsigned long i = 0; i < str.length(); i++)
     {
         if (!std::isdigit(str[i]))
             return (false);
     }
-    try
+    for (unsigned long i = 0; i < str.size(); i++)
     {
-        nb = std::stoi(str);
+        num *= 10;
+        num = num + (str[i] - '0');
     }
-    catch(std::exception &e)
-    {
+    if (num > 2147483647)
         return (false);
-    }
     return (true);
 }
 
-
-void    PhoneBook::addNewContact()
+void PhoneBook::addNewContact()
 {
     std::string str;
     std::string msg = "";
-    
+
     index++;
     if (index > 7)
         index = 0;
@@ -66,11 +65,12 @@ void    PhoneBook::addNewContact()
         index = -1;
     for (int i = 0; i < 5; i++)
     {
-        std::cout<<mesContacts[index].getMessage(i)<<std::endl;;
+        std::cout << mesContacts[index].getMessage(i) << std::endl;
+        ;
         std::getline(std::cin, str);
         if (std::cin.eof() == true)
         {
-            std::cout<<"FIN DE PROGRAMME\n";
+            std::cout << "FIN DE PROGRAMME\n";
             exit(0);
         }
         if (i == 0)
@@ -106,25 +106,28 @@ void    PhoneBook::addNewContact()
             if (!is_num(str) || str.empty())
                 msg = "Le numéro est erroné ou vide";
             else
-                this->mesContacts[index].setNumTel(std::stoi(str));
+                this->mesContacts[index].setNumTel(std::atoi(str.c_str()));
         }
         if (!msg.empty())
         {
             index--;
-            std::cout<<"ERROR : "<<msg<<std::endl;
+            std::cout << "ERROR : " << msg << std::endl;
             break;
         }
     }
     if (msg.empty())
-        std::cout<<"Le contact est ajouté avec succés"<<std::endl;
+        std::cout << "Le contact est ajouté avec succés" << std::endl;
 }
 
 void PhoneBook::printHeader()
 {
-    std::cout<<std::setw(10)<<"INDEX"<<"|"
-            <<std::setw(10)<<"FIRST NAME"<<"|"
-            <<std::setw(10)<<"LAST NAME"<<"|"
-            <<std::setw(10)<<"NICKNAME"<<std::endl;
+    std::cout << std::setw(10) << "INDEX"
+              << "|"
+              << std::setw(10) << "FIRST NAME"
+              << "|"
+              << std::setw(10) << "LAST NAME"
+              << "|"
+              << std::setw(10) << "NICKNAME" << std::endl;
 }
 
 void PhoneBook::printContacts()
@@ -132,12 +135,12 @@ void PhoneBook::printContacts()
     int i = 0;
     // std::cout<<index<<std::endl;
     // for (int i = 0; i < index + 1; i++)
-    while (this->mesContacts[i].getFirstName().size() != 0 && i<=7)
+    while (this->mesContacts[i].getFirstName().size() != 0 && i <= 7)
     {
         this->mesContacts[i].afficheContact(i);
         i++;
     }
-    std::cout<<std::endl;
+    std::cout << std::endl;
 }
 
 void PhoneBook::searchContact()
@@ -146,25 +149,25 @@ void PhoneBook::searchContact()
     int id = 0;
 
     if (index == -1)
-        std::cout<<"le repertoire est vide!"<<std::endl;
+        std::cout << "\nle repertoire est vide!" << std::endl;
     else
     {
         printHeader();
         printContacts();
-        std::cout<<"Entrer l'index du contact que vous voulez afficher"<<std::endl;
+        std::cout << "Entrer l'index du contact que vous voulez afficher" << std::endl;
         std::getline(std::cin, ind);
         if (is_num(ind))
         {
-            id = std::stoi(ind);
-            if (this->mesContacts[id].getFirstName().size() != 0 && id<=7)
+            id =std::atoi(ind.c_str());
+            if (this->mesContacts[id].getFirstName().size() != 0 && id <= 7)
             {
                 printHeader();
                 this->mesContacts[id].afficheContact(id);
             }
             else
-                std::cout<<"cet index n'existe pas"<<std::endl;
+                std::cout << "cet index n'existe pas" << std::endl;
         }
         else
-            std::cout<<"cet index n'est pas valide"<<std::endl;
+            std::cout << "cet index n'est pas valide" << std::endl;
     }
 }
